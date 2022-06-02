@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+      {% include "includes/footer.html" %}
+{% load static %}
+<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+<h2>My Files</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>File Name</th>
+        <th>File Description</th>
+        <th>Size</th>
+        <th>Uploaded By</th>
+        <th>Download</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for file in files %}
+    <tr>
+        <td> {{ file.File_Name }}</td>
+        <td> {{ file.File_Type }}</td>
+        <td> {{ file.File_Size }}</td>
+        <td> {{ file.Uploaded_By }}</td>
+        <td>
+            <a href="{{ file.File.url }}" class="btn btn-primary btn-sm" target="_blank">
+               Download File
+            </a>
+        </td>
+        <td>
+            <form method="post" action="{% url 'delete_file' file.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+  <script>
+
+            }
+          },
+        },
+      },
+    });
+  </script>
+
+{% endblock javascripts %}
